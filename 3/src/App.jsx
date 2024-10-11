@@ -7,32 +7,32 @@ import ThemeSwitcher from './ThemeSwitcher.jsx';
 import ThemeContext from './contexts';
 
 const themes = [
-  {
-    id: 1,
-    name: 'White',
-    className: 'light',
-  },
-  {
-    id: 2,
-    name: 'Black',
-    className: 'dark',
-  },
-  {
-    id: 3,
-    name: 'Blue',
-    className: 'dark-blue',
-  },
+  { id: 1, name: 'White', className: 'light' },
+  { id: 2, name: 'Black', className: 'dark' },
+  { id: 3, name: 'Blue', className: 'dark-blue' },
 ];
 
 const ThemeProvider = ({ children }) => {
-  // BEGIN (write your solution here)
+  const [currentTheme, setCurrentTheme] = useState(themes[0]);
 
-  // END
+  const themeContextValue = {
+    themes,
+    theme: currentTheme,
+    setTheme: setCurrentTheme,
+  };
+
+  return (
+    <ThemeContext.Provider value={themeContextValue}>
+      <div className={currentTheme.className}>
+        {children}
+      </div>
+    </ThemeContext.Provider>
+  );
 };
 
 const App = () => (
   <ThemeProvider>
-    <Tabs className="mb-3">
+    <Tabs className="mb-3" defaultActiveKey="home">
       <Tab eventKey="home" title="Home">
         <Home />
       </Tab>
